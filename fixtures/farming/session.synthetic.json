@@ -1,0 +1,36 @@
+{
+  "schema_version": "farming-session-v1",
+  "session_id": "10000000-0000-4000-8000-000000000001",
+  "dataset": "synthetic",
+  "provenance": {
+    "kind": "personal_entry",
+    "evidence_kind": "self_reported_measurement"
+  },
+  "market": {
+    "game_type": "forever",
+    "region": "eu",
+    "scope": "realm",
+    "realm_slug": "fixture-normal-alliance",
+    "ruleset": "normal",
+    "faction": "alliance"
+  },
+  "character_label": "Personnage entièrement fictif",
+  "started_at": "2026-01-01T12:00:00Z",
+  "ended_at": "2026-01-01T12:35:00Z",
+  "active_seconds": 1800,
+  "break_seconds": 300,
+  "duration_basis": "active_including_travel_and_management",
+  "location_label": "Lieu fictif, aucune correspondance de jeu",
+  "activity_label": "Relevé de démonstration entièrement fictif",
+  "profession_label": null,
+  "specialization_label": null,
+  "loot_recording": "complete",
+  "drops": [
+    {"item_id": 2447, "quantity": 12}
+  ],
+  "direct_copper": 0,
+  "consumables_cost_copper": null,
+  "repairs_cost_copper": null,
+  "other_costs_copper": null,
+  "notes": "Fixture inventée pour préparer un futur import. Aucune session de jeu réelle."
+}

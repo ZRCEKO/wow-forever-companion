@@ -1,0 +1,3 @@
+itemId,name,marketValue,minBuyout,recent,historical,updatedAt,newProviderField
+2447,FICTITIOUS item 2447,13000,11000,12500,11500,2026-01-01T15:00:00Z,example
+2770,FICTITIOUS item 2770,8000,7000,,8000,2026-01-01T15:00:00Z,

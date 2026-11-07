@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: goldmaking
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-dev-only}
+      POSTGRES_DB: goldmaking
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U goldmaking -d goldmaking"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  migrate:
+    build: .
+    environment: &backend_env
+      DATABASE_URL: postgresql+psycopg://goldmaking:${POSTGRES_PASSWORD:-local-dev-only}@db:5432/goldmaking
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["alembic", "upgrade", "head"]
+  api:
+    build: .
+    environment: *backend_env
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  ingest:
+    build: .
+    environment: *backend_env
+    profiles: ["ingest"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    command: ["goldmaking", "demo"]
+volumes:
+  postgres_data:
